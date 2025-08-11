@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Prism from "prismjs";
 import "prismjs/themes/prism.css";      // theme first
 import "prismjs/components/prism-python"; // then language
@@ -12,7 +12,6 @@ type Props = {
 export default function CodeViewer({ src, language = "python", title }: Props) {
     const [code, setCode] = useState<string>("");
     const [error, setError] = useState<string | null>(null);
-    const codeRef = useRef<HTMLElement>(null);
 
     useEffect(() => {
         let active = true;
@@ -79,7 +78,6 @@ export default function CodeViewer({ src, language = "python", title }: Props) {
             ) : (
                 <pre className="overflow-x-auto p-4 text-sm">
                     <code
-                        ref={codeRef}
                         className={`language-${language}`}
                         dangerouslySetInnerHTML={{ __html: highlighted }}
                     />
