@@ -1,69 +1,41 @@
-# React + TypeScript + Vite
+# Logical Proof of the Trinity
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project hosts a small website that presents a formal logical model of the Nicene doctrine of the Trinity. The front end is built with [Vite](https://vitejs.dev/), [React](https://react.dev/), TypeScript and Tailwind CSS.
 
-Currently, two official plugins are available:
+The site includes:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Home** – overview of the approach and results.
+- **Paper** – link to the full PDF write‑up.
+- **Model** – in‑browser version of the Python model (beta).
+- **Code** – direct access to the Z3 model.
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open [http://localhost:5173](http://localhost:5173) to view the site.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Scripts
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- `npm run dev` – start the development server.
+- `npm run build` – type‑check and create a production build.
+- `npm run lint` – run ESLint over the source.
+
+## Python model
+
+`public/trinity_formal_model.py` contains the formal logic model backed by the [Z3 theorem prover](https://github.com/Z3Prover/z3). Run it locally with:
+
+```bash
+pip install z3-solver
+python public/trinity_formal_model.py
 ```
+
+The file `public/trinity_formal_model.pdf` summarizes the method, axioms and results.
+
+---
+
+The goal is not to prove the metaphysical truth of the Trinity but to show that the Nicene formulation is internally consistent in classical logic.
+
