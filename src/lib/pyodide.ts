@@ -1,14 +1,24 @@
 // src/lib/pyodide.ts
-let pyodideReady: Promise<any> | null = null;
 
-export async function getPyodide() {
+// Minimal Pyodide interface for our needs
+export interface Pyodide {
+    runPythonAsync(code: string): Promise<unknown>;
+}
+
+let pyodideReady: Promise<Pyodide> | null = null;
+
+declare global {
+    interface Window {
+        loadPyodide?: (opts: { indexURL: string }) => Promise<Pyodide>;
+    }
+}
+
+export async function getPyodide(): Promise<Pyodide> {
     if (pyodideReady) return pyodideReady;
 
-    // Load the Pyodide script from CDN
-    // (You can self-host later if you prefer.)
     const url = "https://cdn.jsdelivr.net/pyodide/v0.26.1/full/pyodide.js";
 
-    // Ensure script is only injected once
+    // Load Pyodide script only once
     if (!document.querySelector(`script[src="${url}"]`)) {
         await new Promise<void>((resolve, reject) => {
             const s = document.createElement("script");
@@ -20,9 +30,13 @@ export async function getPyodide() {
         });
     }
 
-    // @ts-expect-error pyodide global injected by the script
-    pyodideReady = window.loadPyodide?.({
+    if (!window.loadPyodide) {
+        throw new Error("Pyodide loader not found after script load.");
+    }
+
+    pyodideReady = window.loadPyodide({
         indexURL: "https://cdn.jsdelivr.net/pyodide/v0.26.1/full/",
     });
-    return pyodideReady!;
+
+    return pyodideReady;
 }
