@@ -21,6 +21,13 @@ function getErrorMessage(e: unknown): string {
     return e instanceof Error ? e.message : String(e);
 }
 
+// Regex to detect any form of z3 import at the start of a line while
+// ignoring commented lines (e.g. "# import z3"). It matches:
+//  - "import z3"
+//  - "import z3.something"
+//  - "from z3 import ..."
+const z3ImportRegex = /^\s*(?:import\s+z3(?:\.\w+)?|from\s+z3\s+import\b)/m;
+
 export default function Model() {
     const [status, setStatus] = useState<Status>("idle");
     const [log, setLog] = useState<string>("");
@@ -74,7 +81,7 @@ f"Hello from Python!\\nPython {platform.python_version()}\\nSys: {sys.version.sp
             const src = await srcResp.text();
 
             // Detect z3 import
-            if (/\bimport\s+z3\b|from\s+z3\s+import\b/.test(src)) {
+            if (z3ImportRegex.test(src)) {
                 setLog(
                     `Loaded trinity_formal_model.py (${src.length} bytes).
 
