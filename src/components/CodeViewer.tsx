@@ -30,11 +30,12 @@ export default function CodeViewer({ src, language = "python", title }: Props) {
         };
     }, [src]);
 
-    const highlighted = useMemo(() => {
+    const highlighted = useMemo<string>(() => {
         try {
             return Prism.highlight(code, Prism.languages[language], language);
         } catch {
-            return code; // fallback: raw
+            // Fallback: encode raw text to avoid HTML injection
+            return Prism.util.encode(code) as string;
         }
     }, [code, language]);
 
