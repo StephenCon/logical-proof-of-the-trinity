@@ -5,6 +5,7 @@ export interface Pyodide {
     runPythonAsync(code: string): Promise<unknown>;
 }
 
+let pyodideScript: Promise<void> | null = null;
 let pyodideReady: Promise<Pyodide> | null = null;
 
 declare global {
@@ -18,9 +19,8 @@ export async function getPyodide(): Promise<Pyodide> {
 
     const url = "https://cdn.jsdelivr.net/pyodide/v0.26.1/full/pyodide.js";
 
-    // Load Pyodide script only once
-    if (!document.querySelector(`script[src="${url}"]`)) {
-        await new Promise<void>((resolve, reject) => {
+    if (!pyodideScript) {
+        pyodideScript = new Promise<void>((resolve, reject) => {
             const s = document.createElement("script");
             s.src = url;
             s.async = true;
@@ -29,6 +29,8 @@ export async function getPyodide(): Promise<Pyodide> {
             document.head.appendChild(s);
         });
     }
+
+    await pyodideScript;
 
     if (!window.loadPyodide) {
         throw new Error("Pyodide loader not found after script load.");
