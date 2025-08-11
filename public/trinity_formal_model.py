@@ -1,7 +1,7 @@
 # ===============================================
 # Trinity Formal Consistency Model (Nicene Creed)
 # ===============================================
-# Author: Stephen [Surname]
+# Author: Stephen Connett
 # Date: 10 August 2025
 #
 # PURPOSE:
