@@ -16,12 +16,13 @@ export default function NavBar() {
     return (
         <header className="sticky top-0 z-50 border-b bg-white/70 backdrop-blur">
             <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-                <Link to="/" className="font-semibold tracking-tight">
+                {/* Logo */}
+                <Link to="/" className="font-semibold tracking-tight whitespace-nowrap">
                     LogicalProofOfTheTrinity<span className="text-blue-600">.com</span>
                 </Link>
 
                 {/* Desktop nav */}
-                <nav className="hidden md:flex gap-6 text-sm">
+                <nav className="hidden md:flex gap-6 text-sm ml-6">
                     <Link to="/paper" className="hover:text-blue-600">Paper</Link>
                     <Link to="/model" className="hover:text-blue-600">Model</Link>
                     <Link to="/code" className="hover:text-blue-600">Code</Link>
