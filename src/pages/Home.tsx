@@ -27,7 +27,7 @@ function Card({ title, children }: { title: string; children: React.ReactNode })
     return (
         <section className="rounded-2xl border p-6">
             <h2 className="text-xl font-semibold">{title}</h2>
-            <div className="mt-3 text-gray-700">{children}</div>
+            <div className="mt-4 text-gray-700">{children}</div>
         </section>
     );
 }
@@ -55,17 +55,11 @@ export default function Home() {
                     >
                         Read the Paper
                     </Link>
-                    <Link
-                        to="/model"
-                        className="rounded-xl border px-5 py-3 hover:bg-gray-50"
-                    >
+                    <Link to="/model" className="rounded-xl border px-5 py-3 hover:bg-gray-50">
                         Explore the Model (beta)
                     </Link>
-                    <Link
-                        to="/code"
-                        className="rounded-xl border px-5 py-3 hover:bg-gray-50"
-                    >
-                        View the Code
+                    <Link to="/code" className="rounded-xl border px-5 py-3 hover:bg-gray-50">
+                        View the code
                     </Link>
                     <a
                         href="/trinity_formal_model.py"
@@ -85,315 +79,304 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* Layer 1 — Plain-English TL;DR */}
-            <Card title="In one minute: what we did (for everyone)">
-                <ul className="list-disc pl-6 space-y-2">
-                    <li>
-                        <strong>We turned the Trinity into clear, logical rules</strong> that a
-                        computer can check.
-                    </li>
-                    <li>
-                        <strong>The computer tested those rules</strong> to see if they clash or
-                        contradict.
-                    </li>
-                    <li>
-                        <strong>Result:</strong> No contradictions — the Nicene Trinity (“three
-                        persons, one essence”) fits together logically.
-                    </li>
-                </ul>
+            {/* Stacked sections with consistent gaps */}
+            <div className="space-y-8">
+                {/* Layer 1 — Plain-English TL;DR */}
+                <Card title="In one minute: what we did (for everyone)">
+                    <ul className="list-disc pl-6 space-y-2">
+                        <li>
+                            <strong>We turned the Trinity into clear, logical rules</strong> that a
+                            computer can check.
+                        </li>
+                        <li>
+                            <strong>The computer tested those rules</strong> to see if they clash or
+                            contradict.
+                        </li>
+                        <li>
+                            <strong>Result:</strong> No contradictions — the Nicene Trinity (“three
+                            persons, one essence”) fits together logically.
+                        </li>
+                    </ul>
 
-                <div className="mt-6 rounded-xl bg-green-50 border border-green-200 p-4 text-green-800 font-semibold">
-                    ✅ The Nicene Trinity is logically consistent.
-                </div>
+                    <div className="mt-6 rounded-xl bg-green-50 border border-green-200 p-4 text-green-800 font-semibold">
+                        ✅ The Nicene Trinity is logically consistent.
+                    </div>
 
-                <div className="mt-4 grid gap-2">
-                    <div className="flex items-center justify-between">
-                        <span className="text-sm text-gray-800">Core Nicene formulation</span>
-                        <Pill tone="good">SAT (consistent)</Pill>
+                    <div className="mt-6 grid gap-2">
+                        <div className="flex items-center justify-between py-1">
+                            <span className="text-sm text-gray-800">Core Nicene formulation</span>
+                            <Pill tone="good">SAT (consistent)</Pill>
+                        </div>
+                        <div className="flex items-center justify-between py-1">
+                            <span className="text-sm text-gray-800">
+                                Modalism — claims Father and Son are the same person
+                            </span>
+                            <Pill tone="bad">UNSAT (contradiction)</Pill>
+                        </div>
+                        <div className="flex items-center justify-between py-1">
+                            <span className="text-sm text-gray-800">
+                                Tritheism — claims there are three separate Gods
+                            </span>
+                            <Pill tone="bad">UNSAT (contradiction)</Pill>
+                        </div>
+                        <div className="flex items-center justify-between py-1">
+                            <span className="text-sm text-gray-800">
+                                Subordinationism — claims the Son is less divine than the Father
+                            </span>
+                            <Pill tone="bad">UNSAT (contradiction)</Pill>
+                        </div>
                     </div>
-                    <div className="flex items-center justify-between">
-                        <span className="text-sm text-gray-800">
-                            Modalism — claims Father and Son are the same person
-                        </span>
-                        <Pill tone="bad">UNSAT (contradiction)</Pill>
-                    </div>
-                    <div className="flex items-center justify-between">
-                        <span className="text-sm text-gray-800">
-                            Tritheism — claims there are three separate Gods
-                        </span>
-                        <Pill tone="bad">UNSAT (contradiction)</Pill>
-                    </div>
-                    <div className="flex items-center justify-between">
-                        <span className="text-sm text-gray-800">
-                            Subordinationism — claims the Son is less divine than the Father
-                        </span>
-                        <Pill tone="bad">UNSAT (contradiction)</Pill>
-                    </div>
-                </div>
 
-                <p className="mt-4 text-sm text-gray-600">
-                    We’re <em>not</em> proving the Trinity is metaphysically true — only that it’s
-                    not a logical contradiction.
-                </p>
-            </Card>
-
-            {/* Layman’s Explanation */}
-            <Card title="Layman’s Explanation (Plain English)">
-                <p className="text-gray-700 mb-4">
-                    This project uses a computer program to check whether the Christian doctrine of
-                    the Trinity is free from contradictions.
-                </p>
-                <ul className="list-disc pl-6 space-y-2">
-                    <li>We define exactly three Persons: the Father, the Son, and the Holy Spirit.</li>
-                    <li>
-                        We say all three fully share the same divine nature, have the same will, and are
-                        equally God.
-                    </li>
-                    <li>
-                        We add relationships: the Father begets the Son; the Holy Spirit proceeds from
-                        the Father.
-                    </li>
-                    <li>
-                        The computer checks if these claims clash — if not, it says{" "}
-                        <strong>SAT</strong> (consistent).
-                    </li>
-                    <li>
-                        We also test famous “wrong” views (heresies):
-                        <ul className="list-disc pl-6">
-                            <li>
-                                <strong>Modalism</strong> – says Father and Son are the same person →
-                                Contradiction.
-                            </li>
-                            <li>
-                                <strong>Tritheism</strong> – says there are three separate Gods →
-                                Contradiction.
-                            </li>
-                            <li>
-                                <strong>Subordinationism</strong> – says the Son is less divine →
-                                Contradiction.
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <p className="mt-4 text-sm text-gray-600">
-                    Bottom line: The Nicene view ("three distinct Persons, one God") passes the logic
-                    test. The heresies fail. This doesn’t prove the Trinity is real — only that it’s
-                    not self-contradictory.
-                </p>
-            </Card>
-
-            {/* Technical details */}
-            <details className="mt-6 rounded-2xl border p-6 group open:shadow-sm">
-                <summary className="cursor-pointer list-none">
-                    <div className="flex items-center justify-between">
-                        <h2 className="text-xl font-semibold">Technical details (for programmers)</h2>
-                        <span className="text-sm text-blue-600 group-open:rotate-180 transition">
-                            ▼
-                        </span>
-                    </div>
-                    <p className="mt-1 text-sm text-gray-600">
-                        First-order logic, Z3 sorts/functions, axioms, and UNSAT tests.
+                    <p className="mt-4 text-sm text-gray-600">
+                        We’re <em>not</em> proving the Trinity is metaphysically true — only that it’s
+                        not a logical contradiction.
                     </p>
-                </summary>
+                </Card>
 
-                <div className="mt-4 text-gray-700 space-y-4">
-                    {/* Entities */}
-                    <div>
-                        <h3 className="font-semibold">Entities (Sorts)</h3>
-                        <ul className="list-disc pl-6">
-                            <li>
-                                <code>Person</code> = {`{Father, Son, Spirit}`}
-                            </li>
-                            <li>
-                                <code>Essence</code> with constant <code>E</code> (the one divine essence)
-                            </li>
-                            <li>
-                                <code>Attr</code> (divine attributes), <code>Will</code> (divine will)
-                            </li>
-                        </ul>
-                    </div>
-
-                    {/* Relations */}
-                    <div>
-                        <h3 className="font-semibold">Relations / Functions</h3>
-                        <ul className="list-disc pl-6">
-                            <li>
-                                <code>Shares(Person, Essence)</code> – a Person fully shares an Essence
-                            </li>
-                            <li>
-                                <code>Has(Essence, Attr)</code> and <code>HasP(Person, Attr)</code>
-                            </li>
-                            <li>
-                                <code>Begets(parent, child)</code>,{" "}
-                                <code>Proceeds(source, person)</code>
-                            </li>
-                            <li>
-                                <code>will_of(Person) → Will</code>, with unity of will
-                            </li>
-                        </ul>
-                    </div>
-
-                    {/* Axioms */}
-                    <div>
-                        <h3 className="font-semibold">Core axioms (sketch)</h3>
-                        <ul className="list-disc pl-6">
-                            <li>
-                                <strong>Unique Essence:</strong> ∀x:Essence. x = E
-                            </li>
-                            <li>
-                                <strong>Consubstantiality:</strong> Shares(F,E) ∧ Shares(S,E) ∧ Shares(H,E)
-                            </li>
-                            <li>
-                                <strong>Attribute Sharing:</strong> ∀p,a. Has(E,a) → HasP(p,a)
-                            </li>
-                            <li>
-                                <strong>Relations of Origin:</strong> Begets(F,S) ∧ ¬Begets(S,F) ∧
-                                Proceeds(F,H)
-                            </li>
-                            <li>
-                                <strong>Unity of Will:</strong> ∀p. will_of(p) = will_of_E
-                            </li>
-                            <li>
-                                <strong>Distinctness:</strong> F≠S ∧ F≠H ∧ S≠H
-                            </li>
-                        </ul>
-                    </div>
-
-                    {/* Verification */}
-                    <div>
-                        <h3 className="font-semibold">Verification tasks</h3>
-                        <ul className="list-disc pl-6">
-                            <li>Check SAT for core axioms</li>
-                            <li>
-                                Check UNSAT for:
-                                <ul className="list-disc pl-6">
-                                    <li>Modalism: add constraint F = S</li>
-                                    <li>Tritheism: introduce E2 with E2 ≠ E</li>
-                                    <li>Subordinationism: Has(E,Omni) ∧ ¬HasP(S,Omni)</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div className="rounded-xl border bg-gray-50 p-4 text-sm">
-                        Source:{" "}
-                        <a
-                            className="text-blue-600 underline"
-                            href="/trinity_formal_model.py"
-                            download
-                        >
-                            trinity_formal_model.py
-                        </a>
-                        . Run locally with <code>pip install z3-solver</code>.
-                    </div>
-                </div>
-            </details>
-
-            {/* Theological details */}
-            <details className="mt-4 rounded-2xl border p-6 group open:shadow-sm">
-                <summary className="cursor-pointer list-none">
-                    <div className="flex items-center justify-between">
-                        <h2 className="text-xl font-semibold">
-                            Theological mapping (for theologians)
-                        </h2>
-                        <span className="text-sm text-blue-600 group-open:rotate-180 transition">
-                            ▼
-                        </span>
-                    </div>
-                    <p className="mt-1 text-sm text-gray-600">
-                        How the formal symbols correspond to Nicene terms and why deviations break.
+                {/* Layman’s Explanation */}
+                <Card title="Layman’s Explanation (Plain English)">
+                    <p className="mb-4 text-gray-700">
+                        This project uses a computer program to check whether the Christian doctrine of
+                        the Trinity is free from contradictions.
                     </p>
-                </summary>
 
-                <div className="mt-4 text-gray-700 space-y-4">
-                    <div>
-                        <h3 className="font-semibold">Correspondence</h3>
-                        <ul className="list-disc pl-6">
-                            <li>
-                                <strong>Persons (hypostases):</strong>{" "}
-                                <code>Person ∈ {"{F,S,H}"}</code>
-                            </li>
-                            <li>
-                                <strong>One essence (ousia):</strong> constant <code>E</code> with{" "}
-                                <code>∀x:Essence. x = E</code>
-                            </li>
-                            <li>
-                                <strong>Consubstantial:</strong> each Person shares{" "}
-                                <code>E</code> (<code>Shares(p,E)</code>)
-                            </li>
-                            <li>
-                                <strong>Unity of will:</strong>{" "}
-                                <code>will_of(F)=will_of(S)=will_of(H)</code>
-                            </li>
-                            <li>
-                                <strong>Relations of origin:</strong> generation (Father→Son),
-                                procession (Father→Spirit)
-                            </li>
-                        </ul>
+                    <ul className="list-disc pl-6 space-y-2">
+                        <li>We define exactly three Persons: the Father, the Son, and the Holy Spirit.</li>
+                        <li>
+                            We say all three fully share the same divine nature, have the same will, and are
+                            equally God.
+                        </li>
+                        <li>
+                            We add relationships: the Father begets the Son; the Holy Spirit proceeds from
+                            the Father.
+                        </li>
+                        <li>
+                            The computer checks if these claims clash — if not, it says{" "}
+                            <strong>SAT</strong> (consistent).
+                        </li>
+                        <li>
+                            We also test famous “wrong” views (heresies):
+                            <ul className="mt-2 list-disc pl-6 space-y-1">
+                                <li>
+                                    <strong>Modalism</strong> – says Father and Son are the same person →
+                                    Contradiction.
+                                </li>
+                                <li>
+                                    <strong>Tritheism</strong> – says there are three separate Gods →
+                                    Contradiction.
+                                </li>
+                                <li>
+                                    <strong>Subordinationism</strong> – says the Son is less divine →
+                                    Contradiction.
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <p className="mt-4 text-sm text-gray-600">
+                        Bottom line: The Nicene view ("three distinct Persons, one God") passes the logic
+                        test. The heresies fail. This doesn’t prove the Trinity is real — only that it’s
+                        not self-contradictory.
+                    </p>
+                </Card>
+
+                {/* Layer 2 — For programmers */}
+                <details className="rounded-2xl border p-6 group open:shadow-sm">
+                    <summary className="cursor-pointer list-none">
+                        <div className="flex items-center justify-between">
+                            <h2 className="text-xl font-semibold">Technical details (for programmers)</h2>
+                            <span className="text-sm text-blue-600 group-open:rotate-180 transition">▼</span>
+                        </div>
+                        <p className="mt-1 text-sm text-gray-600">
+                            First‑order logic, Z3 sorts/functions, axioms, and UNSAT tests.
+                        </p>
+                    </summary>
+
+                    <div className="mt-4 space-y-4 text-gray-700">
+                        <div>
+                            <h3 className="font-semibold">Entities (Sorts)</h3>
+                            <ul className="list-disc pl-6">
+                                <li>
+                                    <code>Person</code> = {`{Father, Son, Spirit}`}
+                                </li>
+                                <li>
+                                    <code>Essence</code> with constant <code>E</code> (the one divine essence)
+                                </li>
+                                <li>
+                                    <code>Attr</code> (divine attributes), <code>Will</code> (divine will)
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 className="font-semibold">Relations / Functions</h3>
+                            <ul className="list-disc pl-6">
+                                <li>
+                                    <code>Shares(Person, Essence)</code> – a Person fully shares an Essence
+                                </li>
+                                <li>
+                                    <code>Has(Essence, Attr)</code> and <code>HasP(Person, Attr)</code>
+                                </li>
+                                <li>
+                                    <code>Begets(parent, child)</code>, <code>Proceeds(source, person)</code>
+                                </li>
+                                <li>
+                                    <code>will_of(Person) → Will</code>, with unity of will
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 className="font-semibold">Core axioms (sketch)</h3>
+                            <ul className="list-disc pl-6">
+                                <li>
+                                    <strong>Unique Essence:</strong> ∀x:Essence. x = E
+                                </li>
+                                <li>
+                                    <strong>Consubstantiality:</strong> Shares(F,E) ∧ Shares(S,E) ∧ Shares(H,E)
+                                </li>
+                                <li>
+                                    <strong>Attribute Sharing:</strong> ∀p,a. Has(E,a) → HasP(p,a)
+                                </li>
+                                <li>
+                                    <strong>Relations of Origin:</strong> Begets(F,S) ∧ ¬Begets(S,F) ∧ Proceeds(F,H)
+                                </li>
+                                <li>
+                                    <strong>Unity of Will:</strong> ∀p. will_of(p) = will_of_E
+                                </li>
+                                <li>
+                                    <strong>Distinctness:</strong> F≠S ∧ F≠H ∧ S≠H
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 className="font-semibold">Verification tasks</h3>
+                            <ul className="list-disc pl-6">
+                                <li>Check SAT for core axioms</li>
+                                <li>
+                                    Check UNSAT for:
+                                    <ul className="mt-2 list-disc pl-6 space-y-1">
+                                        <li>Modalism: add constraint F = S</li>
+                                        <li>Tritheism: introduce E2 with E2 ≠ E</li>
+                                        <li>Subordinationism: Has(E,Omni) ∧ ¬HasP(S,Omni)</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div className="rounded-xl border bg-gray-50 p-4 text-sm">
+                            Source:{" "}
+                            <a className="text-blue-600 underline" href="/trinity_formal_model.py" download>
+                                trinity_formal_model.py
+                            </a>
+                            . Run locally with <code>pip install z3-solver</code>.
+                        </div>
                     </div>
+                </details>
 
-                    <div>
-                        <h3 className="font-semibold">Why the heresies fail (in logic)</h3>
-                        <ul className="list-disc pl-6">
-                            <li>
-                                <strong>Modalism:</strong> collapsing persons (<code>F=S</code>)
-                                violates “distinct hypostases”. With other axioms in place, this
-                                forces inconsistency.
-                            </li>
-                            <li>
-                                <strong>Tritheism:</strong> multiple essences (<code>E2≠E</code>)
-                                contradict the axiom of unique essence.
-                            </li>
-                            <li>
-                                <strong>Subordinationism:</strong> denying an essential attribute to
-                                the Son breaks “what the essence has, each Person has”.
-                            </li>
-                        </ul>
+                {/* Layer 3 — For theologians */}
+                <details className="rounded-2xl border p-6 group open:shadow-sm">
+                    <summary className="cursor-pointer list-none">
+                        <div className="flex items-center justify-between">
+                            <h2 className="text-xl font-semibold">Theological mapping (for theologians)</h2>
+                            <span className="text-sm text-blue-600 group-open:rotate-180 transition">▼</span>
+                        </div>
+                        <p className="mt-1 text-sm text-gray-600">
+                            How the formal symbols correspond to Nicene terms and why deviations break.
+                        </p>
+                    </summary>
+
+                    <div className="mt-4 space-y-4 text-gray-700">
+                        <div>
+                            <h3 className="font-semibold">Correspondence</h3>
+                            <ul className="list-disc pl-6">
+                                <li>
+                                    <strong>Persons (hypostases):</strong> <code>Person ∈ {"{F,S,H}"}</code>
+                                </li>
+                                <li>
+                                    <strong>One essence (ousia):</strong> constant <code>E</code> with{" "}
+                                    <code>∀x:Essence. x = E</code>
+                                </li>
+                                <li>
+                                    <strong>Consubstantial:</strong> each Person shares <code>E</code>{" "}
+                                    (<code>Shares(p,E)</code>)
+                                </li>
+                                <li>
+                                    <strong>Unity of will:</strong> <code>will_of(F)=will_of(S)=will_of(H)</code>
+                                </li>
+                                <li>
+                                    <strong>Relations of origin:</strong> generation (Father→Son), procession
+                                    (Father→Spirit)
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 className="font-semibold">Why the heresies fail (in logic)</h3>
+                            <ul className="list-disc pl-6">
+                                <li>
+                                    <strong>Modalism:</strong> collapsing persons (<code>F=S</code>) violates
+                                    “distinct hypostases”. With other axioms in place, this forces inconsistency.
+                                </li>
+                                <li>
+                                    <strong>Tritheism:</strong> multiple essences (<code>E2≠E</code>) contradict
+                                    the axiom of unique essence.
+                                </li>
+                                <li>
+                                    <strong>Subordinationism:</strong> denying an essential attribute to the Son
+                                    breaks “what the essence has, each Person has”.
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div className="rounded-xl border bg-gray-50 p-4 text-sm">
+                            Full discussion and references are in the PDF:{" "}
+                            <a
+                                className="text-blue-600 underline"
+                                href="/trinity_formal_model.pdf"
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                trinity_formal_model.pdf
+                            </a>
+                            .
+                        </div>
                     </div>
+                </details>
 
-                    <div className="rounded-xl border bg-gray-50 p-4 text-sm">
-                        Full discussion and references are in the PDF:{" "}
-                        <a
-                            className="text-blue-600 underline"
-                            href="/trinity_formal_model.pdf"
-                            target="_blank"
-                            rel="noreferrer"
-                        >
-                            trinity_formal_model.pdf
-                        </a>
-                        .
-                    </div>
-                </div>
-            </details>
+                {/* What’s here */}
+                <section className="grid gap-6 sm:grid-cols-2 md:grid-cols-4">
+                    <a
+                        href="/trinity_formal_model.pdf"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="rounded-2xl border p-6 hover:bg-gray-50"
+                    >
+                        <h3 className="text-lg font-semibold">Read the Paper</h3>
+                        <p className="mt-2 text-gray-700">Method, axioms, and reproducible results.</p>
+                    </a>
 
-            {/* What’s here */}
-            <section className="mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-4">
-                <a
-                    href="/trinity_formal_model.pdf"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="rounded-2xl border p-6 hover:bg-gray-50"
-                >
-                    <h3 className="text-lg font-semibold">Read the Paper</h3>
-                    <p className="mt-2 text-gray-700">Method, axioms, and reproducible results.</p>
-                </a>
-                <a
-                    href="/trinity_formal_model.py"
-                    download
-                    className="rounded-2xl border p-6 hover:bg-gray-50"
-                >
-                    <h3 className="text-lg font-semibold">Download the Code</h3>
-                    <p className="mt-2 text-gray-700">Python/Z3 source for replication.</p>
-                </a>
-                <Link to="/model" className="rounded-2xl border p-6 hover:bg-gray-50">
-                    <h3 className="text-lg font-semibold">Run it (in browser)</h3>
-                    <p className="mt-2 text-gray-700">Pyodide demo coming online.</p>
-                </Link>
-                <Link to="/code" className="rounded-2xl border p-6 hover:bg-gray-50">
-                    <h3 className="text-lg font-semibold">View the Code</h3>
-                    <p className="mt-2 text-gray-700">View the code in the browser.</p>
-                </Link>
-            </section>
+                    <a
+                        href="/trinity_formal_model.py"
+                        download
+                        className="rounded-2xl border p-6 hover:bg-gray-50"
+                    >
+                        <h3 className="text-lg font-semibold">Download the Code</h3>
+                        <p className="mt-2 text-gray-700">Python/Z3 source for replication.</p>
+                    </a>
+
+                    <Link to="/model" className="rounded-2xl border p-6 hover:bg-gray-50">
+                        <h3 className="text-lg font-semibold">Run it (in browser)</h3>
+                        <p className="mt-2 text-gray-700">Pyodide demo coming online.</p>
+                    </Link>
+
+                    <Link to="/code" className="rounded-2xl border p-6 hover:bg-gray-50">
+                        <h3 className="text-lg font-semibold">View the Code</h3>
+                        <p className="mt-2 text-gray-700">View the code in the browser.</p>
+                    </Link>
+                </section>
+            </div>
         </main>
     );
 }
