@@ -18,6 +18,9 @@
 #
 # INSTALL:
 #   pip install z3-solver
+#
+# RUN:
+#   python trinity_formal_model.py
 
 from z3 import *
 
